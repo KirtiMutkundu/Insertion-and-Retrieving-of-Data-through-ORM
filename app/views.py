@@ -60,12 +60,29 @@ def display_webpages(request):
     QLWO=Webpage.objects.all().order_by(Length ('name'))
     QLWO=Webpage.objects.all().order_by(Length ('name').desc())
 
+    QLWO=Webpage.objects.filter(name__startswith='m')
+    QLWO=Webpage.objects.filter(name__endswith='o')
+    QLWO=Webpage.objects.filter(name__contains='d')
+    QLWO=Webpage.objects.filter(url__contains='l')
+    QLWO=Webpage.objects.filter(name__in=['msd'])
+    QLWO=Webpage.objects.filter(name__in=['msd','Virat']) #case sensitive
+
     d={'QLWO':QLWO}
     return render(request,'display_webpages.html', d)
 
 def display_accessrecord(request):
     QLAO=AccessRecord.objects.all()
     #QLAO=AccessRecord.objects.all
+
+    QLAO=AccessRecord.objects.filter(date='2004-08-25')
+    QLAO=AccessRecord.objects.filter(date__year='2000')
+    QLAO=AccessRecord.objects.filter(date__month='7')
+    QLAO=AccessRecord.objects.filter(date__day='26')
+    QLAO=AccessRecord.objects.filter(date__gt='2004-08-25')
+    QLAO=AccessRecord.objects.filter(date__lte='2023-08-25')
+    QLAO=AccessRecord.objects.filter(date__year__gt='2023')
+
+
     d={'QLAO':QLAO}
     return render(request,'display_accessrecord.html', d)
     
